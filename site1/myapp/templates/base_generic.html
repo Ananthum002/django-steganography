@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>StegTool</title>
+    {% endblock %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="col-sm-2 sidebar-menu">
+            {% block sidebar %}
+            <ul class="sidebar-nav">
+                <li><a href="{% url 'index' %}">🏠 Home</a></li>
+                <li><a href="{% url 'encode' %}">🔒 Encode</a></li>
+                <li><a href="{% url 'decode' %}">🔓 Decode</a></li>
+                <li><a href="{% url 'share' %}">📤 Share</a></li>
+                <li><a href="{% url 'recieved' %}">📥 Received</a></li>
+                <li><a href="{% url 'logout' %}">🚪 Logout</a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <p>
+                    Copyright ©
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    All rights reserved
+                </p>
+            </div>
+            {% endblock %}
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-sm-10 main-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+
+</body>
+</html>

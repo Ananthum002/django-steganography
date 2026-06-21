@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<!--  <p>Welcome to Django Website<em></em>!</p>-->
+  <div class="dashboard">
+
+    <h1>🔐 Steganography Tool</h1>
+
+    <p class="subtitle">
+        Securely hide and retrieve secret messages inside images using steganography.
+    </p>
+
+    <a href="{% url 'encode' %}" class="start-btn">
+        🚀 Start Encoding
+    </a>
+
+    <div class="cards">
+
+       <a href="{% url 'encode' %}" class="card">
+    <h3>🔒 Encode</h3>
+    <p>Hide secret messages inside images.</p>
+</a>
+
+        <a href="{% url 'decode' %}" class="card">
+    <h3>🔓 Decode</h3>
+    <p>Extract hidden messages from images.</p>
+</a>
+
+        <a href="{% url 'share' %}" class="card">
+    <h3>📤 Share</h3>
+    <p>Share encoded files securely.</p>
+</a>
+        <a href="{% url 'recieved' %}" class="card">
+    <h3>📥 Received</h3>
+    <p>View received encrypted files.</p>
+</a>
+
+    </div>
+
+</div>
+{% endblock %}
+

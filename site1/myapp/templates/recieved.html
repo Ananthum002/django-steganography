@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Embedded Message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <h3 id="#messageBody">Message</h3>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+  <div class="container row justify-content-center px-2 ml-1">
+    {% for i in data %}
+    <div class="col-md-3 px-2 mt-2" onclick="decode_image_url('{{i}}')">
+        <img src="/{{i}}" class="img-fluid">
+    </div>
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}

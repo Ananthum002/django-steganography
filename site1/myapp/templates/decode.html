@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class="row tab-panel">
+        <div class="col-md-6 tab-section tab-active" tab-id = "decText">
+            Decode Text 
+        </div>
+        <div class="col-md-6 tab-section" tab-id = "decFile">
+            Decode Text File
+        </div>
+    </div>
+    <div class="encode-form">
+        <form method="post" action="" id="decodeForm" enctype="multipart/form-data">
+            <!-- {% csrf_token %} -->
+            <div class="form-group">
+                <label class="custom-file-upload">
+                    <input type="file" name="decodeimg" required id="decodeimg"/>
+                    {% load static %} <img src="{% static "images/Upload.png" %}" alt="uploadimg" />
+                    <span class="upload-btn">Select Image For Decoding</span><span id="Upfilename"></span>
+                    <span class="err-res"></span>
+                </label>
+            </div>
+            <div class ="btn-panel">
+                <button type="submit" id="desubmitbtn" class="btn btn-success">Decode</button>
+            </div>
+            <div id="loader" >
+                <div class="lds-ellipsis"><div>1O</div><div>O1</div><div>1O</div><div>O1</div>
+                    <span >Processing...</span>
+                </div>
+            </div>
+        </form>
+        <div class="decode-text">
+            Secret Message: <span></span>
+        </div>
+    </div>
+{% endblock %}

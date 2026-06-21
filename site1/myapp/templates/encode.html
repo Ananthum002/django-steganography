@@ -1,0 +1,241 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="row tab-panel">
+    <div class="col-md-6 tab-section tab-active" tab-id="encText">
+        Encode Text
+    </div>
+
+```
+<div class="col-md-6 tab-section" tab-id="encFile">
+    Encode Text File
+</div>
+```
+
+</div>
+
+<div class="encode-form">
+
+<form method="post"
+      action="{% url 'process_encoding_data' %}"
+      id="encodeForm"
+      enctype="multipart/form-data">
+
+```
+{% csrf_token %}
+
+<!-- Cover Image Upload -->
+
+<div class="form-group">
+
+    <label class="custom-file-upload">
+
+        <input type="file"
+       name="encodeimg"
+       id="encodeimg"
+       accept="image/*">
+
+        {% load static %}
+        <img src="{% static 'images/Upload.png' %}" alt="uploadimg" />
+
+        <span class="upload-btn">
+            📷 Select Cover Image
+        </span>
+
+        <span id="Upfilename"></span>
+
+        <span class="err-res"></span>
+
+    </label>
+
+</div>
+
+<!-- Image Preview -->
+
+<div style="text-align:center; margin-bottom:20px;">
+
+    <img id="coverPreview"
+         src=""
+         style="
+            display:none;
+            max-width:350px;
+            border-radius:15px;
+            border:2px solid #00ff88;
+         ">
+
+</div>
+
+<!-- Encode Text -->
+
+<div class="tab-content show-tab" id="encText">
+
+    <input type="hidden" name="istextsteg" value="1">
+
+    <div class="form-group">
+
+        <h4 style="color:#00ff88; margin-bottom:10px;">
+            ✍ Secret Message
+        </h4>
+
+        <textarea
+            placeholder="Enter your secret message here..."
+            class="form-control form-in"
+            id="message"
+            name="message"
+            rows="6"
+            maxlength="1000"></textarea>
+
+        <small id="charCounter"
+               style="color:#00ff88; float:right;">
+            0 / 1000
+        </small>
+
+    </div>
+
+</div>
+
+<!-- Encode File -->
+
+<div class="tab-content" id="encFile">
+
+    <div class="form-group">
+
+        <input type="file"
+               name="textfile"
+               id="fileInput"
+               accept=".txt"
+               hidden>
+
+        <div class="upload-box" id="dropZone">
+
+            <h3>📁 Drag & Drop Text File Here</h3>
+
+            <p>or click to browse</p>
+
+        </div>
+
+        <span id="UpTextfilename"></span>
+
+    </div>
+
+</div>
+
+<div class="btn-panel">
+
+    <button type="submit"
+            id="submitbtn"
+            class="btn btn-success encode-btn">
+
+        🔐 Encode Message
+
+    </button>
+
+</div>
+
+<div id="loader">
+
+    <div class="lds-ellipsis">
+        <div>1O</div>
+        <div>O1</div>
+        <div>1O</div>
+        <div>O1</div>
+        <span>Processing...</span>
+    </div>
+
+</div>
+```
+
+</form>
+
+</div>
+
+<script>
+
+// Character Counter
+
+const messageBox = document.getElementById("message");
+const counter = document.getElementById("charCounter");
+
+if(messageBox){
+
+    messageBox.addEventListener("input", function(){
+
+        counter.innerText =
+            this.value.length + " / 1000";
+
+    });
+
+}
+
+// Cover Image Preview
+
+const coverImage = document.getElementById("encodeimg");
+const coverPreview = document.getElementById("coverPreview");
+
+if(coverImage){
+
+    coverImage.addEventListener("change", function(){
+
+        const file = this.files[0];
+
+        if(!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+            coverPreview.src = e.target.result;
+            coverPreview.style.display = "block";
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+// Drag & Drop
+
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+
+if(dropZone){
+
+    dropZone.addEventListener("click", () => {
+
+        fileInput.click();
+
+    });
+
+    dropZone.addEventListener("dragover", (e) => {
+
+        e.preventDefault();
+        dropZone.classList.add("dragover");
+
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+
+        dropZone.classList.remove("dragover");
+
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+
+        e.preventDefault();
+
+        dropZone.classList.remove("dragover");
+
+        const files = e.dataTransfer.files;
+
+        fileInput.files = files;
+
+    });
+
+}
+
+</script>
+
+{% endblock %}
