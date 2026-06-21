@@ -2,7 +2,10 @@
 
 A full-stack web application built with **Django** that allows users to hide secret messages inside images using **steganography** — the practice of concealing information within another medium so that it remains invisible to the naked eye but can be retrieved by anyone with the right tool.
 
-🔗 **Live Demo:** [https://django-steganography.onrender.com](https://django-steganography.onrender.com)
+🔗 **Try the live demo:**
+- URL: https://django-steganography.onrender.com
+- Demo login — Username: `anan@gmail.com`  Password: `123`
+
 
 ---
 
